@@ -1,0 +1,13 @@
+{
+  "name": "@semantic-versioning/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": false,
+  "devDependencies": {
+    "@nx/js": "17.2.8",
+    "@nx/plugin": "^17.2.8",
+    "@nx/workspace": "17.2.8",
+    "nx": "17.2.8"
+  }
+}
