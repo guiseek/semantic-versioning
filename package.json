@@ -1,13 +1,20 @@
 {
   "name": "@semantic-versioning/source",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "semantic-release": "semantic-release"
+  },
   "private": false,
   "devDependencies": {
     "@nx/js": "17.2.8",
     "@nx/plugin": "^17.2.8",
     "@nx/workspace": "17.2.8",
-    "nx": "17.2.8"
+    "nx": "17.2.8",
+    "semantic-release": "^23.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guiseek/semantic-versioning.git"
   }
 }
