@@ -23,6 +23,20 @@
       "options": {
         "jestConfig": "packages/release/jest.config.ts"
       }
+    },
+    "version": {
+      "executor": "release:version",
+      "cache": true,
+      "configurations": {
+        "production": {
+          "dryRun": false
+        },
+        "development": {
+          "dryRun": true,
+          "verbose": true
+        }
+      },
+      "defaultConfiguration": "development"
     }
   },
   "tags": []

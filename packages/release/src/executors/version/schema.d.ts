@@ -1,3 +1,9 @@
-import type { VersionOptions } from 'nx/src/command-line/release/command-object';
+import type {VersionOptions} from 'nx/src/command-line/release/command-object'
 
-export interface VersionExecutorSchema extends VersionOptions {} // eslint-disable-line
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface VersionExecutorSchema extends VersionOptions {}
+
+export interface ReleaseProject {
+  name: string
+  version: string
+}
