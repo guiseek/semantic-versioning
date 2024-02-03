@@ -1,3 +1,3 @@
-export function release(): string {
-  return 'release';
+export function release() {
+  return 'release'
 }

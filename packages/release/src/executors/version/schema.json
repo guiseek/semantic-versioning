@@ -1,9 +1,68 @@
 {
   "$schema": "http://json-schema.org/schema",
+  "$id": "SemanticVersioningReleaseVersionExecutor",
   "version": 2,
   "title": "Version executor",
   "description": "",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "specifier": {
+      "type": "string",
+      "description": "Version name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Exact version or semver keyword to apply to the selected release group",
+      "enum": ["major", "minor", "patch", "premajor", "preminor", "prepatch"]
+    },
+    "firstRelease": {
+      "type": "boolean",
+      "default": false
+    },
+    "gitCommit": {
+      "type": "boolean",
+      "default": false,
+      "description": "Git commit",
+      "x-prompt": "Whether or not to automatically commit the changes made by current command."
+    },
+    "gitCommitMessage": {
+      "type": "string",
+      "description": "Git commit message",
+      "x-prompt": "Custom git commit message to use when committing the changes made by this command."
+    },
+    "stageChanges": {
+      "type": "boolean",
+      "default": true,
+      "description": "Git stage changes",
+      "x-prompt": "Whether or not to stage the changes made by this command. Always treated as true if commit is true."
+    },
+    "gitTag": {
+      "type": "boolean",
+      "default": true,
+      "description": "Git tag",
+      "x-prompt": "Whether or not to automatically tag the changes made by this command."
+    },
+    "gitTagMessage": {
+      "type": "string",
+      "description": "Git tag message",
+      "x-prompt": "Custom git tag message to use when tagging the changes made by this command. This defaults to be the same value as the tag itself."
+    },
+    "preid": {
+      "type": "string",
+      "description": "The optional prerelease identifier to apply to the version, in the case that specifier has been set to prerelease."
+    },
+    "currentVersionResolver": {
+      "type": "string",
+      "default": "disk",
+      "description": "Which approach to use to determine the current version of the project.",
+      "enum": ["registry", "disk", "git-tag"]
+    },
+    "currentVersionResolverMetadata": {
+      "type": "object",
+      "description": "Additional metadata to pass to the current version resolver.",
+      "default": {}
+    }
+  },
   "required": []
 }
