@@ -47,6 +47,23 @@
   "nxCloudAccessToken": "OTNlYzgwMjctNzAzOS00ZDA2LWEzZWEtOWJkMjRjMTRlYWQwfHJlYWQtd3JpdGU=",
   "release": {
     "projects": ["packages/*"],
-    "releaseTagPattern": "{version}"
+    "releaseTagPattern": "{version}",
+    "projectsRelationship": "fixed",
+    "version": {
+      "generatorOptions": {
+        "currentVersionResolver": "git-tag",
+        "specifierSource": "conventional-commits"
+      }
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    },
+    "git": {
+      "commit": true,
+      "tag": true
+    }
   }
 }

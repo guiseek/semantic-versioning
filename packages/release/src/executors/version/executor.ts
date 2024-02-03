@@ -1,9 +1,11 @@
-import {VersionExecutorSchema, type ReleaseProject} from './schema'
+import {VersionExecutorSchema} from './schema'
 import {releaseVersion} from 'nx/release'
 import {
   determineBump,
   getFirstRelease,
   getCurrentVersion,
+  showReleasedTable,
+  getReleasedProjects,
 } from '../../lib/version'
 
 export default async function runExecutor(options: VersionExecutorSchema) {
@@ -19,24 +21,11 @@ export default async function runExecutor(options: VersionExecutorSchema) {
 
     const released = await releaseVersion(options)
 
-    const {workspaceVersion, projectsVersionData} = released
+    const {workspace, projects} = getReleasedProjects(released)
 
-    const table: ReleaseProject[] = []
+    showReleasedTable(projects, workspace)
 
-    {
-      const name = 'workspace'
-      const version = `${workspaceVersion}`
-
-      table.push({name, version})
-    }
-
-    for (const [name, {newVersion}] of Object.entries(projectsVersionData)) {
-      table.push({name, version: newVersion})
-    }
-
-    console.table(table)
-
-    return {success: true}
+    return {success: projects.length}
   } catch (err) {
     throw new Error(`version 😥 ${err}`)
   }

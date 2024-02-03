@@ -1,11 +1,16 @@
 import {resolveSemverSpecifierFromConventionalCommits} from 'nx/src/command-line/release/utils/resolve-semver-specifier'
+import type {NxReleaseVersionResult} from 'nx/src/command-line/release/version'
+import {createProjectGraphAsync} from 'nx/src/devkit-exports'
+import type {
+  InterpolateData,
+  ReleaseProject,
+  ReleaseProjectResult,
+} from './types'
 import {
   getFirstGitCommit,
   getLatestGitTagForPattern,
 } from 'nx/src/command-line/release/utils/git'
-import {createProjectGraphAsync} from 'nx/src/devkit-exports'
 import {type ReleaseType, inc} from 'semver'
-import {type InterpolateData} from './types'
 
 export async function resolveSemverSpecifierFrom(from: string) {
   const graph = await createProjectGraphAsync()
@@ -40,4 +45,32 @@ export async function determineBump(tag: string, version?: string) {
 
 export function bump(version: string, type: ReleaseType, loose = false) {
   return inc(version, type, {loose}) as string | undefined
+}
+
+export function getReleasedProjects(
+  result: NxReleaseVersionResult
+): ReleaseProjectResult {
+  const {workspaceVersion, projectsVersionData} = result
+
+  const data = Object.entries(projectsVersionData)
+
+  return {
+    workspace: workspaceVersion ?? null,
+    projects: data.map(([name, {newVersion: version}]) => ({name, version})),
+  }
+}
+
+export function showReleasedTable(
+  projects: ReleaseProject[] = [],
+  workspace: string | null
+) {
+  const table: ReleaseProject[] = []
+
+  if (workspace) {
+    table.push({name: 'workspace', version: workspace})
+  }
+
+  table.push(...projects)
+
+  console.table(table)
 }

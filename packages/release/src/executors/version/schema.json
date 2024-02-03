@@ -14,14 +14,7 @@
         "index": 0
       },
       "x-prompt": "Exact version or semver keyword to apply to the selected release group",
-      "enum": [
-        "major",
-        "minor",
-        "patch",
-        "premajor",
-        "preminor",
-        "prepatch"
-      ]
+      "enum": ["major", "minor", "patch", "premajor", "preminor", "prepatch"]
     },
     "firstRelease": {
       "type": "boolean",
@@ -63,11 +56,7 @@
       "type": "string",
       "default": "disk",
       "description": "Which approach to use to determine the current version of the project.",
-      "enum": [
-        "registry",
-        "disk",
-        "git-tag"
-      ]
+      "enum": ["registry", "disk", "git-tag"]
     },
     "currentVersionResolverMetadata": {
       "type": "object",
